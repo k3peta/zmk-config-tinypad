@@ -1,4 +1,4 @@
-#include "tinytb.dtsi"
+#include "tinypad.dtsi"
 #include <input/processors.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
@@ -24,7 +24,8 @@
     };
 };
 
-&xiao_i2c {
+
+&xiao_i2c {
     status = "okay";
 
     tps43: iqs5xx@74 {
@@ -59,6 +60,7 @@
 };
 
 };
+
 
 
 
