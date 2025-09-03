@@ -1,3 +1,3 @@
-# TinyTB
+# TinyPad
 
-TinyTB is a Wireless trackball device .
+TinyPad is a Wireless trackball device .
