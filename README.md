@@ -1,3 +1,3 @@
 # TinyPad
 
-TinyPad is a Wireless trackball device .
+TinyPad is a Wireless trackpad device .
