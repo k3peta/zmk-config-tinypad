@@ -40,7 +40,7 @@
         compatible = "azoteq,iqs5xx";
         reg = <0x74>;
 
-//        reset-gpios = <&gpio0 28 GPIO_ACTIVE_LOW>;
+        reset-gpios = <&gpio0 28 GPIO_ACTIVE_LOW>;
         rdy-gpios = <&gpio0 28 GPIO_ACTIVE_HIGH>;
         /*
          * Potentially non-exhaustive list of configuration options.
@@ -65,6 +65,7 @@
 &tps43_listener {
     status = "okay";
 };
+
 
 
 
