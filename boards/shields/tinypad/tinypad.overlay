@@ -1,4 +1,6 @@
-#include "tinypad.dtsi"
+/* DTSの慣習として #include ではなく /include/ を推奨 */
+ /include/ "tinypad.dtsi"
+
 #include <input/processors.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
@@ -7,26 +9,26 @@
         zmk,kscan = &kscan0;
         zmk,matrix_transform = &default_transform;
     };
-};
 
-&kscan0 {
-        compatible = "zmk,kscan-gpio-direct";
-        input-gpios =
-            <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
-            <&gpio0 3 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
-            <&gpio1 11 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
-            <&gpio1 12 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
-            <&gpio1 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
-            <&gpio1 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-    };
-
-
-
+    /* 新規ノードはルート配下に作る */
     tps43_input: tps43_input {
         compatible = "zmk,input-listener";
+        status = "okay";
         device = <&tps43>;
     };
+};
 
+/* 既存ノードの追記はトップレベルで &ラベル を再オープン */
+&kscan0 {
+    compatible = "zmk,kscan-gpio-direct";
+    input-gpios =
+        <&gpio0  2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
+        <&gpio0  3 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
+        <&gpio1 11 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
+        <&gpio1 12 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
+        <&gpio1 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
+        <&gpio1 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+};
 
 &xiao_i2c {
     status = "okay";
@@ -36,12 +38,9 @@
         compatible = "azoteq,iqs5xx";
         reg = <0x74>;
 
-        reset-gpios = <&gpio0 28 GPIO_ACTIVE_LOW>;
-        rdy-gpios = <&gpio0 28 GPIO_ACTIVE_HIGH>;
-        /*
-         * Potentially non-exhaustive list of configuration options.
-         * See: dts/bindings/input/azoteq,iqs5xx-common.yaml for a full list.
-         */
+        reset-gpios = <&gpio0 29 GPIO_ACTIVE_LOW>;
+        rdy-gpios   = <&gpio0 28 GPIO_ACTIVE_HIGH>;
+
         one-finger-tap;
         press-and-hold;
         press-and-hold-time = <250>;
@@ -61,12 +60,3 @@
 &tps43_listener {
     status = "okay";
 };
-
-
-
-
-
-
-
-
-
