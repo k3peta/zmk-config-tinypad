@@ -1,0 +1,64 @@
+#include "tinytb.dtsi"
+#include <input/processors.dtsi>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+
+&kscan0 {
+        compatible = "zmk,kscan-gpio-direct";
+        input-gpios =
+            <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
+            <&gpio0 3 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
+            <&gpio1 11 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
+            <&gpio1 12 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
+            <&gpio1 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>,
+            <&gpio1 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+    };
+
+
+&pinctrl {
+    spi0_default: spi0_default {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 0, 5)>,
+                    <NRF_PSEL(SPIM_MOSI, 0, 4)>,
+                    <NRF_PSEL(SPIM_MISO, 0, 4)>;
+        };
+    };
+};
+
+&xiao_i2c {
+    status = "okay";
+
+    tps43: iqs5xx@74 {
+        status = "okay";
+        compatible = "azoteq,iqs5xx";
+        reg = <0x74>;
+
+//        reset-gpios = <&gpio0 28 GPIO_ACTIVE_LOW>;
+        rdy-gpios = <&gpio0 28 GPIO_ACTIVE_HIGH>;
+        /*
+         * Potentially non-exhaustive list of configuration options.
+         * See: dts/bindings/input/azoteq,iqs5xx-common.yaml for a full list.
+         */
+        one-finger-tap;
+        press-and-hold;
+        press-and-hold-time = <250>;
+        two-finger-tap;
+
+        scroll;
+        natural-scroll-y;
+        natural-scroll-x;
+
+        bottom-beta = <5>;
+        stationary-threshold = <5>;
+
+        switch-xy;
+    };
+};
+
+&tps43_listener {
+    status = "okay";
+};
+
+};
+
+
+

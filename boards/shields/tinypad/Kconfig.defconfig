@@ -1,0 +1,27 @@
+if SHIELD_TINYPAD
+
+    config ZMK_KEYBOARD_NAME
+        default "TinyPad"
+
+    config ZMK_BLE
+        default y
+
+    config INPUT
+        default y
+
+    config ZMK_POINTING
+        default y
+
+    config SPI
+        default y
+
+    config I2C
+        default y
+
+config RGBLED_WIDGET_BATTERY_LEVEL_HIGH
+    default 30
+
+config RGBLED_WIDGET_BATTERY_LEVEL_CRITICAL
+    default 10
+
+endif

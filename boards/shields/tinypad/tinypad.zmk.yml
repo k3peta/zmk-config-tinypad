@@ -1,0 +1,8 @@
+file_format: "1"
+id: tinypad
+name: TinyPad
+type: shield
+url: https://github.com/k3peta/zmk-config-tinypad
+requires: [seeeduino_xiao_ble]
+features:
+  - keys
